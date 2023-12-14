@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "adtech-takehome"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+flask = "2.3.3"
+flask-sqlalchemy = "^3.1.1"
+wtforms = "^3.1.1"
+mamba = "^0.11.3"
+expects = "^0.9.0"
+flask-wtf = "^1.2.1"
+pre-commit = "^3.6.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
