@@ -9,7 +9,7 @@ from src.domain.order import Order
 with description("order class") as self:
     with it("creates an instance"):
         order_attributes = {
-            "id": 0,
+            "id": 1,
             "name": "John",
             "address": "Doe",
             "created_at": datetime(2023, 12, 6),

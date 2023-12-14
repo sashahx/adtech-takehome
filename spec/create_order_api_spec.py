@@ -20,9 +20,10 @@ with description("create order endpoint") as self:
     with before.all:
         app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///spec_db"
         self.client = app.test_client()
+        self.database = DatabaseAdapter(app.config["SQLALCHEMY_DATABASE_URI"])
 
     with after.all:
-        DatabaseAdapter(app.config["SQLALCHEMY_DATABASE_URI"]).clear_table()
+        self.database.clear_table()
 
     with it("tries to create an order and should fail"):
         response = self.client.post("/create", data={})
@@ -34,6 +35,6 @@ with description("create order endpoint") as self:
         expect(response.status_code).to(equal(200))
 
     with it("tries to get an order created at previous step"):
-        order = DatabaseAdapter(app.config["SQLALCHEMY_DATABASE_URI"]).get_order(1)
+        order = self.database.get_order(1)
         expect(order.get("name")).to(equal(MockOrderForm.name.data))  # type: ignore
         expect(order.get("address")).to(equal(MockOrderForm.address.data))  # type: ignore

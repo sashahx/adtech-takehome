@@ -10,7 +10,7 @@ with description("database") as self:
     with before.all:
         self.database = DatabaseAdapter("sqlite:///spec_db")
         self.order_attributes = {
-            "id": 0,
+            "id": 1,
             "name": "John",
             "address": "Doe",
             "created_at": datetime(2023, 12, 6),
@@ -23,4 +23,4 @@ with description("database") as self:
     with it("receives a new order to insert"):
         order = Order(**self.order_attributes)
         self.database.create_order(order)
-        expect(self.database.get_order(0)).to(equal(self.order_attributes))
+        expect(self.database.get_order(1)).to(equal(self.order_attributes))
